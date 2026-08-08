@@ -13,6 +13,13 @@ spec:
 
   imagePullPolicy: IfNotPresent
 
+  extraEnv:
+    - name: SPLUNK_START_ARGS
+      value: "--accept-license"
+
+    - name: SPLUNK_GENERAL_TERMS
+      value: "--accept-sgt-current-at-splunk-com"
+
   etcVolumeStorageConfig:
     storageClassName: local-path
     storageCapacity: 10Gi
