@@ -9,8 +9,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/YOUR-REPO/k8-cluster.git
+    repoURL: https://github.com/learnwithvikasjha/k8-cluster.git
     path: apps/mysql-lab
+    targetRevision: HEAD
 
   destination:
     server: https://kubernetes.default.svc
