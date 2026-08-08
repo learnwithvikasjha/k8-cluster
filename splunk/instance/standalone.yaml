@@ -1,5 +1,6 @@
 apiVersion: enterprise.splunk.com/v4
 kind: Standalone
+
 metadata:
   name: splunk
   namespace: splunk
@@ -10,7 +11,6 @@ spec:
   replicas: 1
 
   image: splunk/splunk:10.4.0
-
   imagePullPolicy: IfNotPresent
 
   extraEnv:
@@ -35,3 +35,35 @@ spec:
     limits:
       cpu: "4"
       memory: "8Gi"
+
+  appRepo:
+    appsRepoPollIntervalSeconds: 60
+
+    defaults:
+      scope: local
+      volumeName: splunk-app-repo
+
+    volumes:
+      - name: splunk-app-repo
+        storageType: s3
+        provider: aws
+        path: splunk-apps-789
+        endpoint: https://s3.us-east-1.amazonaws.com
+        region: us-east-1
+        secretRef: splunk-s3-secret
+
+    appSources:
+      - name: core
+        location: core
+
+      - name: db
+        location: db
+
+      - name: monitoring
+        location: monitoring
+
+      - name: security
+        location: security
+
+      - name: custom
+        location: custom
