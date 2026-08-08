@@ -10,7 +10,7 @@ spec:
 
   source:
     repoURL: https://github.com/learnwithvikasjha/k8-cluster.git
-    path: apps/mysql-lab
+    path: mysql-lab
     targetRevision: HEAD
 
   destination:
