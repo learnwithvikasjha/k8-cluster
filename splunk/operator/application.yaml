@@ -1,11 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+
 metadata:
   name: splunk-operator
   namespace: argocd
 
 spec:
   project: default
+
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      jsonPointers:
+        - /spec/preserveUnknownFields
+
+    - group: ""
+      kind: ConfigMap
+      name: splunk-operator-manager-telemetry
+      namespace: splunk-operator
+      jsonPointers:
+        - /data/status
 
   source:
     repoURL: https://github.com/learnwithvikasjha/k8-cluster.git
