@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: splunk-operator
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/learnwithvikasjha/k8-cluster.git
+    targetRevision: main
+    path: splunk/operator
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: splunk-operator
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
